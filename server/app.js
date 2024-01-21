@@ -13,7 +13,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const log = (fileName, text) => {
-    const pathToFile = path.join(__dirname, 'logs', `${fileName}.log`);
+    const logsDir = path.join(__dirname, 'logs');
+    if (!fs.existsSync(logsDir)) fs.mkdirSync(logsDir);
+    const pathToFile = path.join(logsDir, `${fileName}.log`);
     fs.appendFileSync(pathToFile, text);
 }
 
