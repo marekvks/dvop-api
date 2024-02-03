@@ -5,7 +5,8 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import cors from 'cors'
 import { logRequest } from './middleware/logger.js';
-import locationRouter from './routes/location/location.js'
+import locationRouter from './routes/location/location.js';
+import orderRouter from './routes/order/order.js';
 
 const app = express();
 const port = process.env.BACKEND_PORT;
@@ -19,5 +20,6 @@ app.use(cors({
 }));
 
 app.use('/location', locationRouter);
+app.use('/order', orderRouter);
 
 app.listen(port, () => console.log('Server running on port', port, '!'));

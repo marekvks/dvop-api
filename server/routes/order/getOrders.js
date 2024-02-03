@@ -1,4 +1,4 @@
-import { orders } from "./order";
+import { orders } from "./order.js";
 
 const getOrders = (req, res) => {
     res.send(orders);

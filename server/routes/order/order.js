@@ -1,17 +1,17 @@
 import express from "express";
 
-import { logRequest } from "../../middleware/logger";
-import getOrders from "./getOrders";
-import updateOrderStatus from "./updateOrderStatus";
+import { logRequest } from "../../middleware/logger.js";
+import getOrders from "./getOrders.js";
+import { nextStatus as nextOrderStatus, prevStatus as prevOrderStatus } from "./updateOrderStatus.js";
 
 const router = express.Router();
 
-export const orderStatusCodes = {
-    'ordered': 0,
-    'processed': 1,
-    'ready to pickup': 2,
-    'completed': 3,
-}
+export const orderStatusCodes = [
+    'ordered',
+    'processed',
+    'ready to pickup',
+    'completed'
+]
 
 let ids = 0;
 
@@ -24,16 +24,21 @@ export const orders = [];
 
 const checkValidOrder = (req, res, next) => {
     const id = Number(req.params.id);
-    if (orders.includes((order) => order.id === id)) {
+    console.log(id, typeof id);
+    if (orders.find((order) => order.id === id)) {
         next();
         return;
     }
 
     res.status(404);
-    res.end();
+    const resBody = {
+        "message": "invalid id."
+    }
+    res.send(JSON.stringify(resBody));
 }
 
 router.get('/', logRequest, getOrders);
-router.patch('/:id/updateStatus', logRequest, checkValidOrder, updateOrderStatus);
+router.patch('/:id/nextStatus', logRequest, checkValidOrder, nextOrderStatus);
+router.patch('/:id/prevStatus', logRequest, checkValidOrder, prevOrderStatus);
 
 export default router;

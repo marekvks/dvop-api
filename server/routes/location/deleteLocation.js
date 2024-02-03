@@ -1,4 +1,4 @@
-import { locations } from "./location";
+import { locations } from "./location.js";
 
 const deleteLocation = (req, res) => {
     const location = locations.find((location) => location.address === req.params.location);

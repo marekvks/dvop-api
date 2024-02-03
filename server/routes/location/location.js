@@ -16,13 +16,13 @@ const checkValidLocation = (req, res, next) => {
     if (!locations.find(location => location.address === req.params.location)) {
         res.status(404);
         res.send(JSON.stringify({
-            'messager': 'Location not found.'
+            'messager': 'location not found.'
         }));
     }
     next();
 }
 
-router.get('/', logRequest, checkValidLocation, getLocations);
+router.get('/', logRequest, getLocations);
 router.post('/', logRequest, createLocation);
 router.get('/:location', logRequest, checkValidLocation, getLocation);
 router.patch('/:location', logRequest, checkValidLocation, updateLocation);
