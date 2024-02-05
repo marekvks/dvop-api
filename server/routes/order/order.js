@@ -3,6 +3,7 @@ import express from "express";
 import { logRequest } from "../../middleware/logger.js";
 import getOrders from "./getOrders.js";
 import { nextStatus as nextOrderStatus, prevStatus as prevOrderStatus } from "./updateOrderStatus.js";
+import deleteOrder from "./deleteOrder.js";
 
 const router = express.Router();
 
@@ -40,5 +41,6 @@ const checkValidOrder = (req, res, next) => {
 router.get('/', logRequest, getOrders);
 router.patch('/:id/nextStatus', logRequest, checkValidOrder, nextOrderStatus);
 router.patch('/:id/prevStatus', logRequest, checkValidOrder, prevOrderStatus);
+router.delete('/:id', logRequest, checkValidOrder, deleteOrder);
 
 export default router;
