@@ -16,10 +16,17 @@ export const __dirname = path.dirname(__filename);
 
 app.use(bodyParser.json());
 app.use(cors({
-    'origin': ['http://localhost:8080', 'http://localhost:3000']
+    'origin': ['http://localhost:8080', 'http://localhost:5173']
 }));
 
-app.use('/location', locationRouter);
-app.use('/order', orderRouter);
+app.use('/location', logRequest, locationRouter);
+app.use('/order', logRequest, orderRouter);
+
+app.all('*', logRequest, (req, res) => {
+    const resBody = {
+        "message": "not found"
+    }
+    res.status(404).send(JSON.stringify(resBody));
+});
 
 app.listen(port, () => console.log('Server running on port', port, '!'));
