@@ -10,7 +10,7 @@ const router = express.Router();
 export const orderStatusCodes = [
     'ordered',
     'processed',
-    'ready to pickup',
+    'ready',
     'completed'
 ]
 

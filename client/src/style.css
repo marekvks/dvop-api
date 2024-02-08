@@ -20,6 +20,20 @@
   padding: 0;
 }
 
+.icon {
+  font-size: 28px;
+  color: #c9c9c9;
+}
+
+.icon:hover {
+  color: #fff;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
 /*a {
   font-weight: 500;
   color: #646cff;
