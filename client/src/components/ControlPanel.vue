@@ -1,5 +1,8 @@
 <script>
 import { ref } from 'vue';
+import Modal from './modal.vue';
+import CreateLocation from './CreateLocation.vue';
+import CreateOrder from './CreateOrder.vue';
 
 let locations = ref([]);
 let orders = ref([]);
@@ -16,6 +19,22 @@ const getLocations = async () => {
   locations.value = data;
 }
 
+const deleteLocation = async (address, index) => {
+  const response = await fetch(`http://localhost:8080/location/${address}`, {
+    "method": "DELETE",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  });
+  
+  const data = await response.json();
+  console.log(data.message);
+  
+  if (response.ok) {
+    locations.value.splice(index, 1);
+  }
+}
+
 const getOrders = async () => {
   const response = await fetch('http://localhost:8080/order', {
     "method": "GET",
@@ -23,24 +42,26 @@ const getOrders = async () => {
       "Content-Type": "application/json"
     }
   });
-
+  
   const data = await response.json();
   orders.value = data;
 }
 
-const postLocation = async () => {
-  const reqBody = {
-    "address": 'Smichov!'
-  }
-
-  const response = await fetch('http://localhost:8080/location', {
-    "method": "POST",
+const deleteOrder = async (id, index) => {
+  const response = await fetch(`http://localhost:8080/order/${id}`, {
+    "method": "DELETE",
     "headers": {
       "Content-Type": "application/json"
-    },
-    body: JSON.stringify(newLocation)
+    }
   });
-};
+
+  const data = await response.json();
+  console.log(data.message);
+  
+  if (response.ok) {
+    orders.value.splice(index, 1);
+  }
+}
 
 const refreshData = () => {
   setInterval(() => {
@@ -50,18 +71,30 @@ const refreshData = () => {
 }
 
 export default {
-  name: "Location",
+  name: "ControlPanel",
   data() {
     return {
       locations,
       orders
     }
   },
+  components: {
+    Modal,
+    CreateLocation,
+    CreateOrder
+},
   methods: {
     getLocations,
+    deleteLocation,
     refreshData,
-    postLocation,
-    getOrders
+    getOrders,
+    deleteOrder,
+    openCreateLocationModal() {
+      this.$refs.createLocationRef.showModal();
+    },
+    openCreateOrderModal() {
+      this.$refs.createOrderRef.showModal();
+    }
   },
   created() {
       refreshData();
@@ -80,7 +113,7 @@ export default {
     <article>
       <section class="side-panel left">
         <span class="icon-button-title">
-          <button type="button">
+          <button type="button" @click="openCreateLocationModal()">
             <font-awesome-icon :icon="['fas', 'circle-plus']" class="icon" />
           </button>
           <h2>Locations</h2>
@@ -96,7 +129,7 @@ export default {
               <button type="button" class="edit">
                 <font-awesome-icon :icon="['fas', 'pen-to-square']" class="icon" />
               </button>
-              <button type="button" class="delete">
+              <button type="button" class="delete" @click="deleteLocation(location.address, index)">
                 <font-awesome-icon :icon="['fas', 'circle-minus']" class="icon" />
               </button>
             </div>
@@ -105,8 +138,8 @@ export default {
       </section>
       <section class="side-panel right">
         <span class="icon-button-title">
-          <button type="button">
-            <font-awesome-icon :icon="['fas', 'circle-plus']" class="icon" />
+          <button type="button" @click="openCreateOrderModal()">
+            <font-awesome-icon :icon="['fas', 'circle-plus']" class="icon"/>
           </button>
           <h2>Orders</h2>
         </span>
@@ -123,7 +156,7 @@ export default {
                 <font-awesome-icon :icon="['fas', 'pen-to-square']" class="icon" />
               </button>
               <button type="button" class="delete">
-                <font-awesome-icon :icon="['fas', 'circle-minus']" class="icon" />
+                <font-awesome-icon :icon="['fas', 'circle-minus']" class="icon" @click="deleteOrder(order.id, index)" />
               </button>
             </div>
           </li>
@@ -131,6 +164,9 @@ export default {
       </section>
     </article>
   </section>
+  <Modal ref="createOrderRef">
+    <CreateOrder />
+  </Modal>
 </template>
 
 <style scoped>
@@ -149,6 +185,8 @@ li {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  height: 100vh;
 }
 
 article {
@@ -158,6 +196,7 @@ article {
   position: relative;
   width: 90%;
   min-height: 70vh;
+  margin-bottom: 50px;
 
   border-radius: 10px;
   border: 1px solid #6625ff24;

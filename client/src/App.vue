@@ -1,11 +1,15 @@
 <script>
-import Location from './components/HelloWorld.vue'
+import ControlPanel from './components/ControlPanel.vue'
+import CreateLocation from './components/CreateLocation.vue';
+import Footer from './components/Footer.vue'; 
 
 export default {
   name: "App",
 
   components: {
-    Location
+    ControlPanel,
+    CreateLocation,
+    Footer
   },
 
   data() {
@@ -17,7 +21,8 @@ export default {
 </script>
 
 <template>
-  <Location />
+  <ControlPanel />
+  <Footer />
 </template>
 
 <style scoped>
