@@ -2,14 +2,15 @@ import express from "express";
 
 import { logRequest } from "../../middleware/logger.js";
 import getOrders from "./getOrders.js";
-import { nextStatus as nextOrderStatus, prevStatus as prevOrderStatus } from "./updateOrderStatus.js";
+import updateOrderStatus from "./updateOrderStatus.js";
+import { checkAvailableStatus } from "./updateOrderStatus.js";
 import deleteOrder from "./deleteOrder.js";
+import getAvailableOrderStatus from "./getAvailableStatuses.js";
 
 const router = express.Router();
 
 export const orderStatusCodes = [
-    'ordered',
-    'processed',
+    'processing',
     'ready',
     'completed'
 ]
@@ -39,8 +40,8 @@ const checkValidOrder = (req, res, next) => {
 }
 
 router.get('/', logRequest, getOrders);
-router.patch('/:id/nextStatus', logRequest, checkValidOrder, nextOrderStatus);
-router.patch('/:id/prevStatus', logRequest, checkValidOrder, prevOrderStatus);
+router.patch('/:id/status', logRequest, checkValidOrder, checkAvailableStatus, updateOrderStatus);
 router.delete('/:id', logRequest, checkValidOrder, deleteOrder);
+router.get('/availableStatuses', logRequest, getAvailableOrderStatus);
 
 export default router;

@@ -1,0 +1,55 @@
+ul {
+    width: 90%;
+  }
+  
+  ul > li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  
+    height: 70px;
+    padding: 0 20px;
+  
+    border-radius: 6px;
+  }
+  
+  ul > li:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  li > .text {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  li .order, li .arrow-icon, li .address, li .status {
+    font-size: 30px;
+    width: 40px
+  }
+  
+  li .arrow-icon {
+    display: none;
+  }
+  
+  li:hover .arrow-icon {
+    display: block;
+  }
+  
+  li:hover .order {
+    display: none;
+  }
+  
+  ul > li > .buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .buttons > .edit > .icon, .delete > .icon {
+    color: #c9c9c9;
+  }
+  
+  .edit:hover > .icon, .delete:hover > .icon {
+    color: #fff;
+  }

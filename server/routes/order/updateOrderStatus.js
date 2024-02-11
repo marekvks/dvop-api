@@ -1,43 +1,32 @@
 import { orders, orderStatusCodes } from "./order.js";
 
-export const nextStatus = (req, res) => {
+export const checkAvailableStatus = (req, res, next) => {
+    const data = req.body;
+
+    if (orderStatusCodes.includes(data.status)) {
+        next();
+        return;
+    }
+
+    const resBody = {
+        'message': 'invalid status.'
+    }
+
+    res.status(404).send(JSON.stringify(resBody));
+}
+
+const updateOrderStatus = (req, res) => {
     const id = Number(req.params.id);
     const order = orders.find((order) => order.id === id);
 
-    const currentStatus = order.status;
-    const currentStatusCode = orderStatusCodes.indexOf(currentStatus);
-
-    const nextStatusCode = Math.min(orderStatusCodes.length - 1, currentStatusCode + 1);
-    const nextStatus = orderStatusCodes[nextStatusCode];
-
-    order.status = nextStatus;
-    console.log(nextStatusCode, nextStatusCode);
-    console.log(order.status);
+    const data = req.body;
+    order.status = data.status;
 
     const resBody = {
         "message": "order status changed!"
     }
 
-    res.status(200);
-    res.send(JSON.stringify(resBody));
+    res.status(200).send(JSON.stringify(resBody));
 }
 
-export const prevStatus = (req, res) => {
-    const id = Number(req.params.id);
-    const order = orders.find((order) => order.id === id);
-
-    const currentStatus = order.status;
-    const currentStatusCode = orderStatusCodes.indexOf(currentStatus);
-
-    const nextStatusCode = Math.max(0, currentStatusCode - 1);
-    const nextStatus = orderStatusCodes[nextStatusCode];
-
-    order.status = nextStatus;
-
-    const resBody = {
-        "message": "order status changed!"
-    }
-
-    res.status(200);
-    res.send(JSON.stringify(resBody));
-}
+export default updateOrderStatus;
