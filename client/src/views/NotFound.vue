@@ -1,6 +1,6 @@
 <template>
 <section>
-    <img src="../../public/404.jpeg" alt="404 not found">
+    <img src="/404.jpeg" alt="404 not found">
 </section>
 </template>
 

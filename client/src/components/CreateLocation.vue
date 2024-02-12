@@ -42,11 +42,14 @@ export default {
     <h1>Create a location</h1>
 
     <form @submit.prevent="submit">
+      <div class="group">
         <label for="address">Address</label>
         <input type="text" name="address" id="address" placeholder="Smíchov" v-model="address">
-        <input type="submit" value="Submit" />
+      </div>
+      <button type="submit" value="Submit">Submit</button>
     </form>
 </template>
 
 <style scoped>
+@import '../modalContent.css';
 </style>

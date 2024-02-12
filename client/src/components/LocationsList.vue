@@ -78,4 +78,11 @@ export default {
 <style scoped>
 @import '../lists.css';
 @import '../modal.css';
+
+.address {
+  display: inline-block;
+  width: 350px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>

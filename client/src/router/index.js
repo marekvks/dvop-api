@@ -1,18 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import ControlPanel from '../components/ControlPanel.vue';
+import Home from '../views/Home.vue';
+import ControlPanel from '../views/ControlPanel.vue';
 import Location from '../views/Location.vue';
 import Order from '../views/Order.vue';
 import NotFound from '../views/NotFound.vue';
 
 const routes = [
     {
-        path: '/admin',
+        path: '/',
         name: 'home',
+        component: Home
+    },
+    {
+        path: '/admin',
+        name: 'ControlPanel',
         component: ControlPanel
     },
     {
         path: '/location/:location',
-        name: 'location',
+        name: 'Location',
         component: Location,
         async beforeEnter(to, from, next) {
             const address = to.params.location;

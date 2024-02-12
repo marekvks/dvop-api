@@ -19,12 +19,12 @@ app.use(cors({
     'origin': ['http://localhost:8080', 'http://localhost:5173']
 }));
 
-app.use('/location', logRequest, locationRouter);
-app.use('/order', logRequest, orderRouter);
+app.use('/location', locationRouter);
+app.use('/order', orderRouter);
 
 app.all('*', logRequest, (req, res) => {
     const resBody = {
-        "message": "not found"
+        "message": "not found."
     }
     res.status(404).send(JSON.stringify(resBody));
 });

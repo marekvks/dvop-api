@@ -1,13 +1,13 @@
 import { locations } from '../location.js';
 import { orderStatusCodes, generateId, orders } from '../../order/order.js';
 
-const checkValidBody = (product) => product == undefined || product.length <= 0;
+const checkValidBody = (description) => description == undefined || description.length <= 0;
 
 const post = (req, res) => {
     const location = locations.find((location) => location.address === req.params.location);
     const data = req.body;
 
-    if (checkValidBody(data.product)) {
+    if (checkValidBody(data.description)) {
         res.status(400);
         const resBody = {
             "message": "invalid request body."
@@ -20,8 +20,9 @@ const post = (req, res) => {
     const statusCode = 0;
     const order = {
         'id': orderId,
-        'product': data.product,
-        'status': orderStatusCodes[statusCode]
+        'description': data.description,
+        'status': orderStatusCodes[statusCode],
+        'location': location.address
     }
 
     orders.push(order);

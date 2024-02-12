@@ -3,10 +3,9 @@
         <h1 class="title">Order {{ order.id }}</h1>
         <article>
                 <ul>
-                    <li>
-                        <h3 class="product"><span>Product</span> - {{ order.product }}</h3>
-                        <h3 class="status"><span>Status</span> - {{ order.status }}</h3>
-                    </li>
+                    <li><span>Description</span> - {{ order.description }}</li>
+                    <li><span>Status</span> - {{ order.status }}</li>
+                    <li><span>Location</span> - {{ order.location }}</li>
                 </ul>
         </article>
     </section>
@@ -81,7 +80,7 @@ article {
 
 ul {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -89,16 +88,10 @@ ul {
 }
 
 li {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    list-style: none;
-}
-
-li h3 {
     font-size: 30px;
     font-weight: 500;
+
+    list-style: none;
 }
 
 li span {

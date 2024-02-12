@@ -1,10 +1,9 @@
 <script>
 import { ref } from 'vue';
-import Modal from './modal.vue';
-import OrdersList from './OrdersList.vue';
-import LocationsList from './LocationsList.vue';
-import CreateLocation from './CreateLocation.vue';
-import CreateOrder from './CreateOrder.vue';
+import OrdersList from '../components/OrdersList.vue';
+import LocationsList from '../components/LocationsList.vue';
+import CreateLocation from '../components/CreateLocation.vue';
+import CreateOrder from '../components/CreateOrder.vue';
 
 const showCreateOrderModal = ref(false);
 const showUpdateOrderModal = ref(false);
@@ -30,7 +29,6 @@ export default {
     }
   },
   components: {
-    Modal,
     CreateLocation,
     CreateOrder,
     OrdersList,

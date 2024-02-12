@@ -3,7 +3,7 @@
     <li v-for="(order, orderIndex) in orders" :key="orderIndex">
       <div class="text">
         <span>{{ order.id }}</span>
-        <span>{{ order.product }}</span>
+        <span class="description">{{ order.description }}</span>
         <select name="status" id="status" v-model="order.status" @change="changeOrderStatus($event, order.id)">
           <option v-for="(status, index) in availableStatuses" :key="index">{{ status }}</option>
         </select>
@@ -145,5 +145,12 @@ select {
   background-color: #121212;
 
   font-size: 20px;
+}
+
+.description {
+  display: inline-block;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

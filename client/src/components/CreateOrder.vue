@@ -19,13 +19,13 @@ const getLocations = async () => {
     console.log(locations.value[0].address)
 }
 
-const postOrder = async (product, locationAddress) => {
+const postOrder = async (description, locationAddress) => {
     const url = `http://localhost:8080/location/${locationAddress}/order`;
 
     console.log(locationAddress);
 
     const reqBody = {
-        product
+        description
     }
 
   const response = await fetch(url, {
@@ -43,7 +43,7 @@ export default {
   name: "CreateOrder",
   data() {
     return {
-        product: '',
+        description: '',
         selectedLocation: '',
         locations
     }
@@ -52,8 +52,8 @@ export default {
     postOrder,
     getLocations,
     submit() {
-        this.$emit('submit', this.product, this.selectedLocation)
-        postOrder(this.product, this.selectedLocation);
+        this.$emit('submit', this.description, this.selectedLocation)
+        postOrder(this.description, this.selectedLocation);
     }
   },
   mounted() {
@@ -68,96 +68,19 @@ export default {
 
     <form @submit.prevent="submit">
         <div class="group">
-            <label for="address">Product </label>
-            <input type="text" name="product" id="product" placeholder="Něco hrozně cool" v-model="product">
+            <label for="address">Description </label>
+            <input type="text" name="description" id="description" placeholder="Něco hrozně cool" v-model="description">
         </div>
         <div class="group">
             <label for="locationSelection">Location </label>
-                <select name="locationSelection" id="locations" v-model="selectedLocation">
-                    <option :value="location.address" v-for="(location, index) in locations" :key="index">{{ location.address }}</option>
-                </select>
+            <select name="locationSelection" id="locations" v-model="selectedLocation">
+                <option :value="location.address" v-for="(location, index) in locations" :key="index">{{ location.address }}</option>
+            </select>
         </div>
         <button type="submit" value="Submit">Submit</button>
     </form>
 </template>
 
 <style scoped>
-
-h1 {
-    margin-bottom: 10px;
-
-    font-size: 25px;
-    color: #fff;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-
-    gap: 5px;
-    width: 50%;
-}
-
-.group {
-    display: flex;
-    justify-content: space-between;
-}
-
-input {
-    background: none;
-
-    border: none;
-    border-bottom: 1px solid #959595;
-    outline: none;
-
-    transition: border-color 0.2s ease;
-}
-
-input:focus {
-    border-color: #fff;
-}
-
-input::placeholder {
-    color: #d2d2d2;
-}
-
-select {
-    width: 150px;
-    padding-left: 10px;
-
-    border: 1px solid #d2d2d2;
-    border-radius: 4px;
-
-    background-color: #121212;
-}
-
-select > option {
-    width: 100%;
-
-    outline: none;
-    border: none;
-    background-color: #121212;
-}
-
-button {
-    align-self: center;
-
-    width: 100px;
-    margin-top: 15px;
-    padding: 5px 10px;
-
-    border: 1px solid #d2d2d2;
-    border-radius: 5px;
-
-    font-size: 18px;
-    color: #d2d2d2;
-
-    transition: all 0.2s ease;
-}
-
-button:hover {
-    border-color: #fff;
-    color: #fff;
-}
-
+@import '../modalContent.css';
 </style>

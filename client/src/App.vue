@@ -1,8 +1,7 @@
 <script>
 import { RouterView } from 'vue-router';
-import ControlPanel from './components/ControlPanel.vue'
+import ControlPanel from './views/ControlPanel.vue'
 import CreateLocation from './components/CreateLocation.vue';
-import Footer from './components/Footer.vue'; 
 
 export default {
   name: "App",
@@ -10,7 +9,6 @@ export default {
   components: {
     ControlPanel,
     CreateLocation,
-    Footer,
     RouterView
 },
 
