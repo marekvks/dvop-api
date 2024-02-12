@@ -2,11 +2,11 @@
 ## Instalace
 - po státhnutí repozitáře je potřeba nainstalovat dependencies
 - postup v příkazové řádce z kořenového adresáře (DVOP-API):
-`cd client`
-`npm i`
-`cd ..`
-`cd server`
-`npm i`
+- `cd client`
+- `npm i`
+- `cd ..`
+- `cd server`
+- `npm i`
 
 ## Spuštění
 ### Server
