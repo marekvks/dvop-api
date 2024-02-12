@@ -5,7 +5,6 @@ const checkExistingAddress = (address) => locations.find(loc => loc.address === 
 const checkRequestBody = (data) => data.address === undefined || data.address.length <= 0;
 
 const post = (req, res) => {
-    console.log(locations);
     const data = req.body;
 
     if (checkRequestBody(data) || checkExistingAddress(data.address)) {
