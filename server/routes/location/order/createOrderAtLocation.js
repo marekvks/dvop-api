@@ -20,7 +20,7 @@ const post = (req, res) => {
     const statusCode = 0;
     const order = {
         'id': orderId,
-        'description': data.description,
+        'description': data.description.trim(),
         'status': orderStatusCodes[statusCode],
         'location': location.address
     }
