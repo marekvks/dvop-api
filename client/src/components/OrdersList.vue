@@ -150,6 +150,7 @@ select {
 .description {
   display: inline-block;
   width: 200px;
+  height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

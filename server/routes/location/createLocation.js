@@ -18,7 +18,7 @@ const post = (req, res) => {
 
     const newLocation = {
          'id': locations.length > 0 ? locations[locations.length - 1].id + 1 : 1,
-         'address': data.address,
+         'address': data.address.trim(),
          'orders': []
     };
 

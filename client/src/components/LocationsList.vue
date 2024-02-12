@@ -82,6 +82,7 @@ export default {
 .address {
   display: inline-block;
   width: 350px;
+  height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
