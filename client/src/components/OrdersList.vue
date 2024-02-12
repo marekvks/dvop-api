@@ -2,14 +2,15 @@
   <ul>
     <li v-for="(order, orderIndex) in orders" :key="orderIndex">
       <div class="text">
-        <span class="address">{{ order.id }}</span>
+        <span>{{ order.id }}</span>
+        <span>{{ order.product }}</span>
         <select name="status" id="status" v-model="order.status" @change="changeOrderStatus($event, order.id)">
           <option v-for="(status, index) in availableStatuses" :key="index">{{ status }}</option>
         </select>
       </div>
       <div class="buttons">
         <button type="button" class="edit">
-          <font-awesome-icon :icon="['fas', 'pen-to-square']" class="icon" />
+          <a :href="'/order/' + order.id"><font-awesome-icon :icon="['fas', 'circle-arrow-right']" class="icon" /></a>
         </button>
         <button type="button" class="delete">
           <font-awesome-icon :icon="['fas', 'circle-minus']" class="icon" @click="deleteOrder(order.id, index)" />
@@ -117,4 +118,32 @@ export default {
 
 <style scoped>
 @import '../lists.css';
+
+li > .text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+
+  width: 100%;
+}
+
+li span {
+  font-size: 30px;
+  width: 40px
+}
+
+select {
+  justify-self: flex-end;
+  width: auto;
+  margin-right: 30px;
+  padding: 4px 10px;
+
+  border: 1px solid #d2d2d2;
+  border-radius: 4px;
+
+  background-color: #121212;
+
+  font-size: 20px;
+}
 </style>

@@ -1,7 +1,7 @@
 import { locations } from '../location.js';
 import { orderStatusCodes, generateId, orders } from '../../order/order.js';
 
-const checkValidBody = (product) => product == undefined;
+const checkValidBody = (product) => product == undefined || product.length <= 0;
 
 const post = (req, res) => {
     const location = locations.find((location) => location.address === req.params.location);

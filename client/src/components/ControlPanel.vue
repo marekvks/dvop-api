@@ -10,8 +10,6 @@ const showCreateOrderModal = ref(false);
 const showUpdateOrderModal = ref(false);
 const showCreateLocationModal = ref(false);
 const showUpdateLocationModal = ref(false);
-let currentlyUpdatedLocation = null;
-
 
 export default {
   data() {
@@ -147,9 +145,7 @@ article {
   font-weight: 700;
 
   margin: 10px 0;
-}
 
-.icon-button-title h2 {
   text-shadow: 0 0 3px #fff;
 }
 

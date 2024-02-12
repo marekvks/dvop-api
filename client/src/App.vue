@@ -1,4 +1,5 @@
 <script>
+import { RouterView } from 'vue-router';
 import ControlPanel from './components/ControlPanel.vue'
 import CreateLocation from './components/CreateLocation.vue';
 import Footer from './components/Footer.vue'; 
@@ -9,8 +10,9 @@ export default {
   components: {
     ControlPanel,
     CreateLocation,
-    Footer
-  },
+    Footer,
+    RouterView
+},
 
   data() {
     return {
@@ -21,8 +23,7 @@ export default {
 </script>
 
 <template>
-  <ControlPanel />
-  <Footer />
+  <router-view />
 </template>
 
 <style scoped>

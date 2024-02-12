@@ -22,11 +22,24 @@ const checkValidLocation = (req, res, next) => {
     next();
 }
 
+export const checkCompletedOrders = (req, res, next) => {
+    const location = locations.find(location => location.address === req.params.location);
+
+    if (location.orders.find(order => order.status !== 'completed')) {
+        const resBody = {
+            'message': 'all orders in this location must be completed or deleted before you can delete this location.'
+        }
+        res.status(400).send(resBody);
+        return;
+    }
+    next();
+}
+
 router.get('/', logRequest, getLocations);
 router.post('/', logRequest, createLocation);
 router.get('/:location', logRequest, checkValidLocation, getLocation);
 router.patch('/:location', logRequest, checkValidLocation, updateLocation);
-router.delete('/:location', logRequest, checkValidLocation, deleteLocation);
+router.delete('/:location', logRequest, checkValidLocation, checkCompletedOrders, deleteLocation);
 router.get('/:location/order', logRequest, checkValidLocation, getOrderAtLocation);
 router.post('/:location/order', logRequest, checkValidLocation, createOrderAtLocation);
 

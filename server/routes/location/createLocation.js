@@ -2,7 +2,7 @@ import { locations } from "./location.js";
 
 const checkExistingAddress = (address) => locations.find(loc => loc.address === address) !== undefined;
 
-const checkRequestBody = (data) => data.address === undefined;
+const checkRequestBody = (data) => data.address === undefined || data.address.length <= 0;
 
 const post = (req, res) => {
     console.log(locations);

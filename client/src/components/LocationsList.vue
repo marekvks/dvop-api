@@ -3,10 +3,10 @@
     <li v-for="(location, index) in locations" :key="index">
       <div class="text">
         <span class="order">{{ index + 1 }}.</span>
-        <font-awesome-icon :icon="['fas', 'circle-arrow-right']" class="icon arrow-icon"/>
         <span class="address">{{ location.address }}</span>
       </div>
       <div class="buttons">
+        <a :href="'/location/' + location.address"><font-awesome-icon :icon="['fas', 'circle-arrow-right']" class="icon arrow-icon"/></a>
         <button type="button" class="delete" @click="deleteLocation(location.address, index)">
           <font-awesome-icon :icon="['fas', 'circle-minus']" class="icon" />
         </button>
